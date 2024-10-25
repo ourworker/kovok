@@ -1,9 +1,9 @@
 import { connect } from 'cloudflare:sockets';
 const listProxy = [
-    { path: '/vless/akamai', proxy: '172.232.238.169' },
-    { path: '/vless/kr', proxy: '52.141.25.42'},
-    { path: '/vless/us', proxy: '91.186.208.191'},
-    { path: '/vless/id', proxy: '34.34.217.201' },
+    { path: '/vless/linode', proxy: '172.232.238.169' },
+    { path: '/vless/korea', proxy: '52.141.25.42'},
+    { path: '/vless/usa', proxy: '91.186.208.191'},
+    { path: '/vless/indo', proxy: '34.34.217.201' },
     { path: '/vless/sgdo', proxy: '188.166.255.195' },
     { path: '/vless/sgdo2', proxy: '143.198.213.197' },
     { path: '/vless/incapsula', proxy: '45.60.186.91' },
