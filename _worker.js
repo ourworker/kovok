@@ -8,6 +8,7 @@ const listProxy = [
     { path: '/do2', proxy: '143.198.213.197' },
     { path: '/incapsula', proxy: '45.60.186.91' },
     { path: '/ovh', proxy: '15.235.162.49' },
+    { path: '/sgdo', proxy: 'proxyip.digitalocean.fxxk.dedyn.io' },
     { path: '/sg', proxy: 'proxyip.sg.fxxk.dedyn.io' },
     { path: '/jp', proxy: 'proxyip.jp.fxxk.dedyn.io' },
     { path: '/vultr', proxy: 'proxyip.vultr.fxxk.dedyn.io' },
