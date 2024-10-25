@@ -12,6 +12,7 @@ const listProxy = [
     { path: '/sg', proxy: 'proxyip.sg.fxxk.dedyn.io' },
     { path: '/jp', proxy: 'proxyip.jp.fxxk.dedyn.io' },
     { path: '/vultr', proxy: 'proxyip.vultr.fxxk.dedyn.io' },
+    { path: '/id', proxy: 'proxyip.id.hw.090227.xyz' },
 ];
 let proxyIP;
 export default {
