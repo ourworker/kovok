@@ -8,7 +8,7 @@ const listProxy = [
     { path: '/do2', proxy: '143.198.213.197' },
     { path: '/incapsula', proxy: '45.60.186.91' },
     { path: '/ovh', proxy: '15.235.162.49' },
-    { path: '/rw', proxy: '202.10.41.1.125' },
+    { path: '/sg', proxy: 'proxyip.sg.fxxk.dedyn.io' },
 ];
 let proxyIP;
 export default {
