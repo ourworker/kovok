@@ -457,6 +457,7 @@ vlessConfigs += `
         return `An error occurred while generating the VLESS configurations. ${error}`;
     }
 }
+/*
 function generateUUIDv4() {
   const randomValues = crypto.getRandomValues(new Uint8Array(16));
   randomValues[6] = (randomValues[6] & 0x0f) | 0x40;
@@ -479,6 +480,9 @@ function generateUUIDv4() {
     randomValues[14].toString(16).padStart(2, '0'),
     randomValues[15].toString(16).padStart(2, '0')
 ].join('').replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5');
+}*/
+function generateUUIDv4() {
+  return 'b90f26f0-834b-41a6-b06c-d173986b3361'; // UUID paten yang diinginkan
 }
 async function vlessOverWSHandler(request) {
 	const webSocketPair = new WebSocketPair();
