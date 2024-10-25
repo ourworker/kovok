@@ -9,7 +9,7 @@ const listProxy = [
     { path: '/incapsula', proxy: '45.60.186.91' },
     { path: '/ovh', proxy: '15.235.162.49' },
     { path: '/sg', proxy: 'proxyip.sg.fxxk.dedyn.io' },
-    { path: '/us', proxy: 'usa.revil.link' },
+    { path: '/jp', proxy: 'proxtip.jp.fxxk.dedyn.io' },
 ];
 let proxyIP;
 export default {
