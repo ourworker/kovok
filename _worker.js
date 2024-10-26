@@ -49,13 +49,13 @@ async function getAllConfigVless(hostName) {
             const response = await fetch(`http://ip-api.com/json/${proxy}`);
             const data = await response.json();
             const pathFixed = encodeURIComponent(path);
-            const vlessTls = `vless://${generateUUIDv4()}\u0040${hostName}:443?encryption=none&security=tls&sni=${hostName}&type=ws&host=${hostName}&path=${pathFixed}#${data.isp} (${data.countryCode})`;
-            const vlessNtls = `vless://${generateUUIDv4()}\u0040${hostName}:80?path=${pathFixed}&security=none&encryption=none&host=${hostName}&type=ws&sni=${hostName}#${data.isp} (${data.countryCode})`;
+            const vlessTls = `vless://${generateUUIDv4()}\u0040img.corz.app:443?encryption=none&security=tls&sni=${hostName}&type=ws&host=${hostName}&path=${pathFixed}#${data.isp} (${data.countryCode})`;
+            const vlessNtls = `vless://${generateUUIDv4()}\u0040img.corz.app:80?path=${pathFixed}&security=none&encryption=none&host=${hostName}&type=ws&sni=${hostName}#${data.isp} (${data.countryCode})`;
             const vlessTlsFixed = vlessTls.replace(/ /g, '+');
             const vlessNtlsFixed = vlessNtls.replace(/ /g, '+');
             const clashConfTls = 
 `- name: ${data.isp} (${data.countryCode})
-  server: ${hostName}
+  server: img.corz.app
   port: 443
   type: vless
   uuid: ${generateUUIDv4()}
@@ -71,7 +71,7 @@ async function getAllConfigVless(hostName) {
   udp: true`;
              const clashConfNtls =
 `- name: ${data.isp} (${data.countryCode})
-  server: ${hostName}
+  server: img.corz.app
   port: 80
   type: vless
   uuid: ${generateUUIDv4()}
