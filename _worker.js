@@ -1,4 +1,5 @@
 import { connect } from 'cloudflare:sockets';
+const bugku = 'img.email1.vidio.com';
 const listProxy = [
     { path: '/akamai', proxy: '172.232.238.169' },
     { path: '/kr', proxy: '52.141.25.42'},
@@ -49,13 +50,13 @@ async function getAllConfigVless(hostName) {
             const response = await fetch(`http://ip-api.com/json/${proxy}`);
             const data = await response.json();
             const pathFixed = encodeURIComponent(path);
-            const vlessTls = `vless://${generateUUIDv4()}\u0040img.corz.app:443?encryption=none&security=tls&sni=${hostName}&type=ws&host=${hostName}&path=${pathFixed}#${data.isp} (${data.countryCode})`;
-            const vlessNtls = `vless://${generateUUIDv4()}\u0040img.corz.app:80?path=${pathFixed}&security=none&encryption=none&host=${hostName}&type=ws&sni=${hostName}#${data.isp} (${data.countryCode})`;
+            const vlessTls = `vless://${generateUUIDv4()}\u0040${bugku}:443?encryption=none&security=tls&sni=${hostName}&type=ws&host=${hostName}&path=${pathFixed}#${data.isp} (${data.countryCode})`;
+            const vlessNtls = `vless://${generateUUIDv4()}\u0040${bugku}80?path=${pathFixed}&security=none&encryption=none&host=${hostName}&type=ws&sni=${hostName}#${data.isp} (${data.countryCode})`;
             const vlessTlsFixed = vlessTls.replace(/ /g, '+');
             const vlessNtlsFixed = vlessNtls.replace(/ /g, '+');
             const clashConfTls = 
 `- name: ${data.isp} (${data.countryCode})
-  server: img.corz.app
+  server: ${bugku}
   port: 443
   type: vless
   uuid: ${generateUUIDv4()}
@@ -71,7 +72,7 @@ async function getAllConfigVless(hostName) {
   udp: true`;
              const clashConfNtls =
 `- name: ${data.isp} (${data.countryCode})
-  server: img.corz.app
+  server: ${bugku}
   port: 80
   type: vless
   uuid: ${generateUUIDv4()}
