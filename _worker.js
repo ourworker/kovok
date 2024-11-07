@@ -1,19 +1,11 @@
 import { connect } from 'cloudflare:sockets';
 const bugku = 'img.email1.vidio.com';
 const listProxy = [
-    { path: '/akamai', proxy: '172.232.238.169' },
-    { path: '/kr', proxy: '52.141.25.42'},
-    { path: '/us', proxy: '91.186.208.191'},
-    { path: '/gcp', proxy: '35.219.50.99' },
-    { path: '/do', proxy: '188.166.255.195' },
-    { path: '/do2', proxy: '143.198.213.197' },
-    { path: '/incapsula', proxy: '45.60.186.91' },
-    { path: '/ovh', proxy: '15.235.162.49' },
-    { path: '/sgdo', proxy: 'proxyip.digitalocean.fxxk.dedyn.io' },
-    { path: '/sg', proxy: 'proxyip.sg.fxxk.dedyn.io' },
-    { path: '/jp', proxy: 'proxyip.jp.fxxk.dedyn.io' },
-    { path: '/vultr', proxy: 'proxyip.vultr.fxxk.dedyn.io' },
-    { path: '/tw', proxy: 'ts.hpc.tw' },
+    { path: '/id', proxy: '35.219.15.90' },
+    { path: '/in', proxy: '35.200.238.235'},
+    { path: '/sg', proxy: '143.198.213.197'},
+    { path: '/us', proxy: '34.83.245.149'},
+    { path: '/au', proxy: '152.69.162.101'},
 ];
 let proxyIP;
 export default {
