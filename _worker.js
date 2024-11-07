@@ -14,6 +14,9 @@ export default {
         proxyIP = proxyIP;
         const url = new URL(request.url);
         const upgradeHeader = request.headers.get('Upgrade');
+	if (!upgradeHeader && !url.pathname.endsWith("/tandes")) {
+	    return Response.redirect("https://google.com", 302);
+	}
         for (const entry of listProxy) {
           if (url.pathname === entry.path) {
             proxyIP = entry.proxy;
