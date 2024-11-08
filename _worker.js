@@ -71,12 +71,12 @@ async function getAllConfigVless(hostName) {
             }
 	    const flagEmoji = countryCodeToFlagEmoji(data.countryCode);
             const pathFixed = encodeURIComponent(path);
-            const vlessTls = `vless://${generateUUIDv4()}\u0040${bugku}:443?encryption=none&security=tls&sni=${hostName}&type=ws&host=${hostName}&path=${pathFixed}#${data.isp} ${flagEmoji}`;
-            const vlessNtls = `vless://${generateUUIDv4()}\u0040${bugku}80?path=${pathFixed}&security=none&encryption=none&host=${hostName}&type=ws&sni=${hostName}#${data.isp} ${flagEmoji}`;
+            const vlessTls = `vless://${generateUUIDv4()}\u0040${bugku}:443?encryption=none&security=tls&sni=${hostName}&type=ws&host=${hostName}&path=${pathFixed}#${data.isp}, ${data.countryCode} ${flagEmoji}`;
+            const vlessNtls = `vless://${generateUUIDv4()}\u0040${bugku}80?path=${pathFixed}&security=none&encryption=none&host=${hostName}&type=ws&sni=${hostName}#${data.isp}, ${data.countryCode} ${flagEmoji}`;
             const vlessTlsFixed = vlessTls.replace(/ /g, '%20');
             const vlessNtlsFixed = vlessNtls.replace(/ /g, '%20');
             const clashConfTls = 
-`- name: ${data.isp} (${flagEmoji})
+`- name: ${data.isp} ${data.countryCode} ${flagEmoji}
   server: ${bugku}
   port: 443
   type: vless
@@ -92,7 +92,7 @@ async function getAllConfigVless(hostName) {
       Host: ${hostName}
   udp: true`;
              const clashConfNtls =
-`- name: ${data.isp} (${flagEmoji})
+`- name: ${data.isp} ${data.countryCode} ${flagEmoji}
   server: ${bugku}
   port: 80
   type: vless
@@ -114,7 +114,7 @@ async function getAllConfigVless(hostName) {
    <textarea id="clashNtls${path}">${clashConfNtls}</textarea>
  </div>
 <div class="config-section" style="background-color: rgba(10, 10, 10, 0.8); color: #00ff00; border: 2px solid #00ff00;">
-    <p style="color: #00ff00;"><strong>ISP:</strong> ${data.isp} (${flagEmoji})</p>
+    <p style="color: #00ff00;"><strong>ISP:</strong> ${data.isp} ${data.countryCode} ${flagEmoji}</p>
     <hr style="border-color: #00ff00; width: 100%; margin-left: auto; margin-right: auto;" />
     <div class="config-toggle">
         <button class="button" onclick="toggleConfig(this, 'Tap Here To Show Configurations', 'Tap Here To Hide')">Tap Here To Show Configurations</button>
@@ -138,7 +138,7 @@ async function getAllConfigVless(hostName) {
 
 vlessConfigs += `
 <div class="config-section" style="background-color: rgba(10, 10, 10, 0.8); color: #00ff00; border: 2px solid #00ff00;">
-    <p style="color: #00ff00;"><strong>ISP:</strong> ${data.isp} (${flagEmoji})</p>
+    <p style="color: #00ff00;"><strong>ISP:</strong> ${data.isp} ${data.countryCode} ${flagEmoji}</p>
     <hr style="border-color: #00ff00; width: 100%; margin-left: auto; margin-right: auto;" />
     <div class="config-toggle">
         <button class="button" onclick="toggleConfig(this, 'Tap Here To Show Account', 'Tap Here To Hide')">Tap Here To Show Account</button>
