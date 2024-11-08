@@ -71,10 +71,10 @@ async function getAllConfigVless(hostName) {
             }
 	    const flagEmoji = countryCodeToFlagEmoji(data.countryCode);
             const pathFixed = encodeURIComponent(path);
-            const vlessTls = `vless://${generateUUIDv4()}\u0040${bugku}:443?encryption=none&security=tls&sni=${hostName}&type=ws&host=${hostName}&path=${pathFixed}#${data.isp} (${flagEmoji})`;
-            const vlessNtls = `vless://${generateUUIDv4()}\u0040${bugku}80?path=${pathFixed}&security=none&encryption=none&host=${hostName}&type=ws&sni=${hostName}#${data.isp} (${flagEmoji})`;
-            const vlessTlsFixed = vlessTls.replace(/ /g, '+');
-            const vlessNtlsFixed = vlessNtls.replace(/ /g, '+');
+            const vlessTls = `vless://${generateUUIDv4()}\u0040${bugku}:443?encryption=none&security=tls&sni=${hostName}&type=ws&host=${hostName}&path=${pathFixed}#${data.isp} ${flagEmoji}`;
+            const vlessNtls = `vless://${generateUUIDv4()}\u0040${bugku}80?path=${pathFixed}&security=none&encryption=none&host=${hostName}&type=ws&sni=${hostName}#${data.isp} ${flagEmoji}`;
+            const vlessTlsFixed = vlessTls.replace(/ /g, '%20');
+            const vlessNtlsFixed = vlessNtls.replace(/ /g, '%20');
             const clashConfTls = 
 `- name: ${data.isp} (${flagEmoji})
   server: ${bugku}
