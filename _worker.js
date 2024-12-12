@@ -44,16 +44,20 @@ const listProxy = [
     { path: '/us', proxy: '34.83.245.149' },
     { path: '/vn', proxy: '103.82.26.183' }
 ];
-let proxyIP;
+let proxyIP; // definisi 
+let userID = "6bf626a0-d2a8-4f82-ac09-98489e598702";
+let kodeUnik = "kodeUnik";
 export default {
-    async fetch(request, ctx) {
+    async fetch(request, env, ctx) {
       try {
         proxyIP = proxyIP;
+        userID = env.uuid || userID;
+        kodeUnik = env.kode || kodeUnik;
         const url = new URL(request.url);
         const upgradeHeader = request.headers.get('Upgrade');
-	if (!upgradeHeader && !url.pathname.endsWith("/tandes")) {
-	    return Response.redirect("https://google.com", 302);
-	}
+    	if (!upgradeHeader && !url.pathname.endsWith(`/${kodeUnik}`)) {
+          return Response.redirect("https://google.com", 302);
+        }
         for (const entry of listProxy) {
           if (url.pathname === entry.path) {
             proxyIP = entry.proxy;
@@ -88,8 +92,8 @@ async function getAllConfigVless(hostName) {
             }
 	    const flagEmoji = countryCodeToFlagEmoji(data.countryCode);
             const pathFixed = encodeURIComponent(path);
-            const vlessTls = `vless://${generateUUIDv4()}\u0040${bugku}:443?encryption=none&security=tls&sni=${hostName}&type=ws&host=${hostName}&path=${pathFixed}#${data.isp}, ${data.country} ${flagEmoji}`;
-            const vlessNtls = `vless://${generateUUIDv4()}\u0040${bugku}80?path=${pathFixed}&security=none&encryption=none&host=${hostName}&type=ws&sni=${hostName}#${data.isp}, ${data.country} ${flagEmoji}`;
+            const vlessTls = `vless://${userID}\u0040${bugku}:443?encryption=none&security=tls&sni=${hostName}&type=ws&host=${hostName}&path=${pathFixed}#${data.isp}, ${data.country} ${flagEmoji}`;
+            const vlessNtls = `vless://${userID}\u0040${bugku}80?path=${pathFixed}&security=none&encryption=none&host=${hostName}&type=ws&sni=${hostName}#${data.isp}, ${data.country} ${flagEmoji}`;
             const vlessTlsFixed = vlessTls.replace(/ /g, '%20');
             const vlessNtlsFixed = vlessNtls.replace(/ /g, '%20');
             const clashConfTls = 
@@ -97,7 +101,7 @@ async function getAllConfigVless(hostName) {
   server: ${bugku}
   port: 443
   type: vless
-  uuid: ${generateUUIDv4()}
+  uuid: ${userID}
   cipher: auto
   tls: true
   skip-cert-verify: true
@@ -113,7 +117,7 @@ async function getAllConfigVless(hostName) {
   server: ${bugku}
   port: 80
   type: vless
-  uuid: ${generateUUIDv4()}
+  uuid: ${userID}
   cipher: auto
   tls: false
   skip-cert-verify: true
@@ -502,7 +506,7 @@ vlessConfigs += `
     }
 }
 /*
-function generateUUIDv4() {
+function userID {
   const randomValues = crypto.getRandomValues(new Uint8Array(16));
   randomValues[6] = (randomValues[6] & 0x0f) | 0x40;
   randomValues[8] = (randomValues[8] & 0x3f) | 0x80;
@@ -525,9 +529,7 @@ function generateUUIDv4() {
     randomValues[15].toString(16).padStart(2, '0')
 ].join('').replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5');
 }*/
-function generateUUIDv4() {
-  return '6bf626a0-d2a8-4f82-ac09-98489e598702'; // UUID paten yang diinginkan
-}
+
 async function vlessOverWSHandler(request) {
 	const webSocketPair = new WebSocketPair();
 	const [client, webSocket] = Object.values(webSocketPair);
@@ -674,15 +676,37 @@ function makeReadableWebSocketStream(webSocketServer, earlyDataHeader, log) {
 	});
 	return stream;
 }
-function processVlessHeader(
-	vlessBuffer
-) {
-	if (vlessBuffer.byteLength < 24) {
-		return {
-			hasError: true,
-			message: 'invalid data',
-		};
-	}
+function processVlessHeader(vlessBuffer) {
+    if (vlessBuffer.byteLength < 24) {
+        return {
+            hasError: true,
+            message: 'invalid data',
+        };
+    }
+
+    // Ambil UUID pengguna dari vlessBuffer (byte 1-16)
+    const uuidBuffer = vlessBuffer.slice(1, 17); // UUID pengguna diasumsikan ada di byte 1-16
+    const userUUID = [...new Uint8Array(uuidBuffer)]
+        .map((byte, index) => {
+            const hex = byte.toString(16).padStart(2, '0');
+            if (index === 3 || index === 5 || index === 7 || index === 9) {
+                return `${hex}-`;
+            }
+            return hex;
+        })
+        .join('');
+
+    // Ambil UUID tetap dari generateUUIDv4
+    const validUUID = userID;
+
+    // Cocokkan UUID pengguna dengan UUID tetap
+    if (userUUID !== validUUID) {
+        return {
+            hasError: true,
+            message: `UUID tidak valid: ${userUUID}`,
+        };
+    }
+
 	const version = new Uint8Array(vlessBuffer.slice(0, 1));
 	let isValidUser = true;
 	let isUDP = false;
