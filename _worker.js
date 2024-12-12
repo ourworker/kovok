@@ -6,7 +6,7 @@ const listProxy = [
     { path: '/amerika', proxy: '161.35.110.111' },
     { path: '/configsantri', proxy: '206.189.55.233' }
 ];
-let proxyIP; // definisi 
+let proxyIP; // definisi
 let userID = "6bf626a0-d2a8-4f82-ac09-98489e598702";
 let kodeUnik = "kodeUnik";
 export default {
