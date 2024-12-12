@@ -526,7 +526,7 @@ function generateUUIDv4() {
 ].join('').replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5');
 }*/
 function generateUUIDv4() {
-  return 'b90f26f0-834b-41a6-b06c-d173986b3361'; // UUID paten yang diinginkan
+  return '6bf626a0-d2a8-4f82-ac09-98489e598702'; // UUID paten yang diinginkan
 }
 async function vlessOverWSHandler(request) {
 	const webSocketPair = new WebSocketPair();
